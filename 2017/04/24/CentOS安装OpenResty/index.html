@@ -12,7 +12,7 @@
 <meta property="og:url" content="https://www.kinglau.net/2017/04/24/CentOS安装OpenResty/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="一、安装准备安装OpenResty之前，您必须将这些库 perl 5.6.1+, libreadline, libpcre, libssl安装在您的电脑之中。 安装perl支持yum install perl* (yum安装perl相关支持)yum install cpan (perl需要的程序库，需要cpan的支持) 安装其他yum install readline-devel pcre-dev">
-<meta property="og:updated_time" content="2017-04-24T10:35:07.000Z">
+<meta property="og:updated_time" content="2017-04-24T10:40:31.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo">
 <meta name="twitter:description" content="一、安装准备安装OpenResty之前，您必须将这些库 perl 5.6.1+, libreadline, libpcre, libssl安装在您的电脑之中。 安装perl支持yum install perl* (yum安装perl相关支持)yum install cpan (perl需要的程序库，需要cpan的支持) 安装其他yum install readline-devel pcre-dev">
@@ -53,9 +53,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://www.kinglau.net"></form>
@@ -83,25 +83,23 @@
 <p>VERSION 的地方替换成您下载的源码包的版本号，比如说 1.11.2.2。</p>
 <p>然后在进入 openresty-VERSION/ 目录, 然后输入以下命令配置:</p>
 <h3 id="configure"><a href="#configure" class="headerlink" title="./configure"></a>./configure</h3><p>默认, –prefix=/usr/local/openresty 程序会被安装到/usr/local/openresty目录。</p>
-<p>您可以指定各种选项，比如<br><code>bash
-./configure --prefix=/opt/openresty \ 
-        --with-luajit \ 
-        --without-http_redis2_module \ 
-        --with-http_iconv_module \ 
-        --with-http_postgres_module</code><br>试着使用 ./configure –help 查看更多的选项。</p>
+<p>您可以指定各种选项，比如<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">./configure --prefix=/opt/openresty \ </div><div class="line">    --with-luajit \ </div><div class="line">    --without-http_redis2_module \ </div><div class="line"> --with-http_iconv_module \ </div><div class="line">--with-http_postgres_module</div></pre></td></tr></table></figure></p>
+<p>试着使用 ./configure –help 查看更多的选项。</p>
 <p>配置文件（./configure script）运行出错可以到 build/nginx-VERSION/objs/autoconf.err 找到。<br>VERSION 必须与<a href="#">OpenResty</a>(<a href="https://openresty.org/cn/openresty.html)版本号相对应" target="_blank" rel="external">https://openresty.org/cn/openresty.html)版本号相对应</a>, 比如 1.11.2.2。</p>
 <h3 id="make"><a href="#make" class="headerlink" title="make"></a>make</h3><p>您可以使用下面的命令来编译：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">make</div></pre></td></tr></table></figure></p>
-<p>如果您的电脑支持多核 make 工作的特性, 您可以这样编译:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">make -j2</div><div class="line">`</div><div class="line"></div><div class="line"><span class="comment">### make install</span></div><div class="line">如果前面的步骤都没有问题的话,您可以使用下面的命令安装l [OpenResty](<span class="comment">#)(https://openresty.org/cn/openresty.html)到您的系统之中：</span></div><div class="line">``` bash</div><div class="line">make install</div></pre></td></tr></table></figure></p>
+<p>如果您的电脑支持多核 make 工作的特性, 您可以这样编译:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">make -j2</div></pre></td></tr></table></figure></p>
+<h3 id="make-install"><a href="#make-install" class="headerlink" title="make install"></a>make install</h3><p>如果前面的步骤都没有问题的话,您可以使用下面的命令安装l <a href="#">OpenResty</a>(#)(<a href="https://openresty.org/cn/openresty.html)到您的系统之中：" target="_blank" rel="external">https://openresty.org/cn/openresty.html)到您的系统之中：</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">make install</div></pre></td></tr></table></figure>
 <p>在 Linux,通常包括 sudo来执行root权限做的事情。</p>
 <h1 id="三、运行"><a href="#三、运行" class="headerlink" title="三、运行"></a>三、运行</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[root@localhost openresty]<span class="comment"># cd /usr/local/openresty/nginx</span></div><div class="line">[root@localhost nginx]<span class="comment"># sbin/nginx</span></div></pre></td></tr></table></figure>
 <h1 id="四、确认是否运行成功"><a href="#四、确认是否运行成功" class="headerlink" title="四、确认是否运行成功"></a>四、确认是否运行成功</h1><p>执行下面命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[root@localhost nginx]<span class="comment"># curl http://localhost</span></div></pre></td></tr></table></figure></p>
-<p>输出如下内容，说明已经成功运行<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span>Welcome to OpenResty!<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></div><div class="line">	body &#123;</div><div class="line">		width: 35em;</div><div class="line">		margin: 0 auto;</div><div class="line">		font-family: Tahoma, Verdana, Arial, sans-serif;</div><div class="line">	&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Welcome to OpenResty!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>If you see this page, the OpenResty web platform is successfully installed and</div><div class="line">working. Further configuration is required.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>For online documentation and support please refer to</div><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"https://openresty.org/"</span>&gt;</span>openresty.org<span class="tag">&lt;/<span class="name">a</span>&gt;</span>.<span class="tag">&lt;<span class="name">br</span>/&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">em</span>&gt;</span>Thank you for flying OpenResty.<span class="tag">&lt;/<span class="name">em</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>输出如下内容，说明已经成功运行<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span>Welcome to OpenResty!<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></div><div class="line">    body &#123;</div><div class="line">        width: 35em;</div><div class="line">        margin: 0 auto;</div><div class="line">        font-family: Tahoma, Verdana, Arial, sans-serif;</div><div class="line">    &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Welcome to OpenResty!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>If you see this page, the OpenResty web platform is successfully installed and</div><div class="line">working. Further configuration is required.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>For online documentation and support please refer to</div><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"https://openresty.org/"</span>&gt;</span>openresty.org<span class="tag">&lt;/<span class="name">a</span>&gt;</span>.<span class="tag">&lt;<span class="name">br</span>/&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">em</span>&gt;</span>Thank you for flying OpenResty.<span class="tag">&lt;/<span class="name">em</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure></p>
 <p>或者在浏览器中输入<a href="http://localhost" target="_blank" rel="external">http://localhost</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.kinglau.net/2017/04/24/CentOS安装OpenResty/" data-id="cj1vzkzpx0000ogcwa3h01r5c" class="article-share-link">Share</a>
+      <a data-url="https://www.kinglau.net/2017/04/24/CentOS安装OpenResty/" data-id="cj1vzrx440000pdcw113ljn41" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -111,7 +109,7 @@
 <nav id="article-nav">
   
     <a href="/2017/04/24/我的第一篇文章/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
+      <strong class="article-nav-caption">Récent</strong>
       <div class="article-nav-title">
         
           (no title)
@@ -149,7 +147,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
         
@@ -178,7 +176,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 John Doe<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
