@@ -99,7 +99,7 @@
 <meta property="og:description" content="一、环境环境准备 CentOS 7 CDH5：基于Apache Hadoop 2.6.0版本开发 jdk1.8  配置SSH无密码登录生成秘钥123456789101112131415161718[kinglau@localhost ~]$ ssh-keygen -t dsa -P &amp;apos;&amp;apos; -f ~/.ssh/id_dsaGenerating public/private dsa">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/226790-feac95cb8f05d2ee.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/226790-3bb9a21544158d8b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-05-05T10:39:16.000Z">
+<meta property="og:updated_time" content="2017-05-06T02:49:31.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CentOS安装hadoop2.6.0-单机">
 <meta name="twitter:description" content="一、环境环境准备 CentOS 7 CDH5：基于Apache Hadoop 2.6.0版本开发 jdk1.8  配置SSH无密码登录生成秘钥123456789101112131415161718[kinglau@localhost ~]$ ssh-keygen -t dsa -P &amp;apos;&amp;apos; -f ~/.ssh/id_dsaGenerating public/private dsa">
@@ -491,7 +491,16 @@
 <h2 id="查看web页面"><a href="#查看web页面" class="headerlink" title="查看web页面"></a>查看web页面</h2><p>访问URL地址：<a href="http://localhost:8088，" target="_blank" rel="external">http://localhost:8088，</a> 浏览yarn web页面</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/226790-feac95cb8f05d2ee.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
 <p>访问URL地址：<a href="http://localhost:50070，" target="_blank" rel="external">http://localhost:50070，</a> 浏览hdfs web页面<br><img src="http://upload-images.jianshu.io/upload_images/226790-3bb9a21544158d8b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Paste_Image.png"></p>
-
+<h2 id="运行wordcount"><a href="#运行wordcount" class="headerlink" title="运行wordcount"></a>运行wordcount</h2><p>dfs上创建input目录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[kinglau@localhost hadoop]$ bin/hadoop fs -mkdir -p input</div></pre></td></tr></table></figure>
+<p>把hadoop目录下的README.txt拷贝到dfs新建的input里</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[kinglau@localhost hadoop]$ bin/hadoop fs -copyFromLocal README.txt input</div></pre></td></tr></table></figure>
+<p>运行wordcount实例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[kinglau@localhost hadoop]$ bin/hadoop jar share/hadoop/mapreduce/hadoop-mapreduce-examples-2.6.0-cdh5.11.0.jar wordcount input output</div></pre></td></tr></table></figure>
+<p>查看结果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[kinglau@localhost hadoop]$ bin/hadoop fs -cat output/*</div></pre></td></tr></table></figure>
+<p>如果再次执行，会提示Output directory hdfs://localhost:8020/user/kinglau/output already exists，需要删除output目录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[kinglau@localhost hadoop]$ bin/hadoop fs -rmr output</div></pre></td></tr></table></figure>
       
     </div>
 
@@ -634,7 +643,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -680,7 +689,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、环境"><span class="nav-number">1.</span> <span class="nav-text">一、环境</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#环境准备"><span class="nav-number">1.1.</span> <span class="nav-text">环境准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置SSH无密码登录"><span class="nav-number">1.2.</span> <span class="nav-text">配置SSH无密码登录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#生成秘钥"><span class="nav-number">1.2.1.</span> <span class="nav-text">生成秘钥</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#验证"><span class="nav-number">1.2.2.</span> <span class="nav-text">验证</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、下载hadoop"><span class="nav-number">2.</span> <span class="nav-text">二、下载hadoop</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#下载"><span class="nav-number">2.1.</span> <span class="nav-text">下载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解压"><span class="nav-number">2.2.</span> <span class="nav-text">解压</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#目录结构"><span class="nav-number">2.3.</span> <span class="nav-text">目录结构</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三、配置"><span class="nav-number">3.</span> <span class="nav-text">三、配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#四、启动服务"><span class="nav-number">4.</span> <span class="nav-text">四、启动服务</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#五、验证"><span class="nav-number">5.</span> <span class="nav-text">五、验证</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#查看进程"><span class="nav-number">5.1.</span> <span class="nav-text">查看进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看web页面"><span class="nav-number">5.2.</span> <span class="nav-text">查看web页面</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、环境"><span class="nav-number">1.</span> <span class="nav-text">一、环境</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#环境准备"><span class="nav-number">1.1.</span> <span class="nav-text">环境准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置SSH无密码登录"><span class="nav-number">1.2.</span> <span class="nav-text">配置SSH无密码登录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#生成秘钥"><span class="nav-number">1.2.1.</span> <span class="nav-text">生成秘钥</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#验证"><span class="nav-number">1.2.2.</span> <span class="nav-text">验证</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、下载hadoop"><span class="nav-number">2.</span> <span class="nav-text">二、下载hadoop</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#下载"><span class="nav-number">2.1.</span> <span class="nav-text">下载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解压"><span class="nav-number">2.2.</span> <span class="nav-text">解压</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#目录结构"><span class="nav-number">2.3.</span> <span class="nav-text">目录结构</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三、配置"><span class="nav-number">3.</span> <span class="nav-text">三、配置</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#四、启动服务"><span class="nav-number">4.</span> <span class="nav-text">四、启动服务</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#五、验证"><span class="nav-number">5.</span> <span class="nav-text">五、验证</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#查看进程"><span class="nav-number">5.1.</span> <span class="nav-text">查看进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查看web页面"><span class="nav-number">5.2.</span> <span class="nav-text">查看web页面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#运行wordcount"><span class="nav-number">5.3.</span> <span class="nav-text">运行wordcount</span></a></li></ol></li></ol></div>
             
 
           </div>
